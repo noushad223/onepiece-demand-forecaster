@@ -2,7 +2,7 @@ name: Python Scheduled Script
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # every day at 6 AM UTC
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -12,9 +12,7 @@ jobs:
       contents: write
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        persist-credentials: false
+      uses: actions/checkout@v4
 
     - name: Setup Python
       uses: actions/setup-python@v4
@@ -35,5 +33,4 @@ jobs:
         git config --local user.email "noushadchowdhury30@hotmail.com"
         git config --local user.name "noushad223"
         git add onepiece_tracker.csv
-        git diff-index --quiet HEAD || git commit -m "Update One Piece tracker [skip ci]"
-        git push origin HEAD:main
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update One Piece tracker [skip ci]" && git push)
