@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        persist-credentials: false
 
     - name: Setup Python
       uses: actions/setup-python@v4
@@ -34,5 +36,4 @@ jobs:
         git config --local user.name "noushad223"
         git add onepiece_tracker.csv
         git diff-index --quiet HEAD || git commit -m "Update One Piece tracker [skip ci]"
-        git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/noushad223/onepiece-demand-forecaster.git
-        git push origin HEAD:main   
+        git push origin HEAD:main
