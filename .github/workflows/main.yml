@@ -29,8 +29,8 @@ jobs:
 
     - name: Push changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "noushadchowdhury30@hotmail.com"
+        git config --local user.name "noushad223"
         git add onepiece_tracker.csv
         git diff-index --quiet HEAD || git commit -m "Update One Piece tracker [skip ci]"
         git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/noushad223/onepiece-demand-forecaster.git
