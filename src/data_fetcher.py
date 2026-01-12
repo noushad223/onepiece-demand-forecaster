@@ -7,7 +7,7 @@ import os
 jikan = Jikan()
 SLEEP = 0.5
 CURRENT_DATE = datetime.date.today()
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 FILE_NAME = os.path.join(BASE_DIR, "onepiece_tracker.csv")
 
 # search by fetching id instead of hardcoding
