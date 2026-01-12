@@ -27,15 +27,11 @@ jobs:
       run: |
         python src/data_fetcher.py
 
-    - name: Commit CSV if changed
+    - name: Push changes
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add onepiece_tracker.csv
-        git diff-index --quiet HEAD || (git commit -a -m "Updated One Piece tracker using GH Actions cronjob [skip ci]" --allow-empty)
-
-    - name: Push changes
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ secrets.GH_PAT }}
-        branch: main
+        git diff-index --quiet HEAD || git commit -m "Update One Piece tracker [skip ci]"
+        git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/noushad223/onepiece-demand-forecaster.git HEAD:main
+   
