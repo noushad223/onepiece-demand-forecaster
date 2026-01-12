@@ -25,7 +25,7 @@ jobs:
 
     - name: Run daily tracker
       run: |
-        python src/onepiece_tracker.py
+        python src/data_fetcher.py
 
     - name: Commit CSV if changed
       run: |
