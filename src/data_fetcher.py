@@ -34,16 +34,17 @@ member_count = one_piece_manga["data"]["members"] + one_piece_anime["data"]["mem
 score_count = round(
     (one_piece_manga["data"]["score"] + one_piece_anime["data"]["score"]) / 2, 1
 )  # find average score
-popularity_manga = one_piece_manga["data"]["popularity"]
-popularity_anime = one_piece_anime["data"]["popularity"]
+scored_by = one_piece_manga["data"]["scored_by"] + one_piece_anime["data"]["scored_by"]
+favourites = one_piece_manga["data"]["favorites"] + one_piece_anime["data"]["favorites"]
 
 current_entry = {
     "date": CURRENT_DATE.strftime("%Y-%m-%d"),
     "members": member_count,
     "score": score_count,
-    "manga_popularity": popularity_manga,
-    "anime_popularity": popularity_anime,
+    "scored_by": scored_by,
+    "favourites": favourites,
 }
+print(current_entry)
 
 df = pd.DataFrame([current_entry])
 try:
