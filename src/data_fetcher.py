@@ -47,12 +47,27 @@ current_entry = {
 print(current_entry)
 
 df = pd.DataFrame([current_entry])
+
 try:
     if not os.path.isfile(FILE_NAME):
         df.to_csv(FILE_NAME, index=False)
     else:
         df_existing = pd.read_csv(FILE_NAME)
-        if current_entry["date"] not in df_existing["date"].values:
+
+        if current_entry["date"] not in df_existing["date"].astype(str).values:
             df.to_csv(FILE_NAME, mode="a", header=False, index=False)
-except (OSError, pd.errors.ParserError) as e:
+    # calculate growth
+    df_growth = pd.read_csv(FILE_NAME)
+
+    df_growth["date"] = pd.to_datetime(df_growth["date"])
+    df_growth = df_growth.sort_values("date")
+
+    df_growth["member_change"] = df_growth["members"].diff()
+    df_growth["scored_by_change"] = df_growth["scored_by"].diff()
+    df_growth["favourites_change"] = df_growth["favourites"].diff()
+
+    df_growth = df_growth.fillna(0)
+    df_growth.to_csv(FILE_NAME, index=False)
+
+except (OSError, pd.errors.ParserError, ValueError) as e:
     print(f"File error: {e}")
