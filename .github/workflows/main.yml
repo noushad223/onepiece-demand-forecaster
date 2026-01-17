@@ -33,4 +33,4 @@ jobs:
         git config --local user.email "noushadchowdhury30@hotmail.com"
         git config --local user.name "noushad223"
         git add onepiece_tracker.csv
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Update One Piece tracker [skip ci]" && git push)
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update One Piece tracker" && git push)
